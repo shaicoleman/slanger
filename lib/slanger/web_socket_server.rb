@@ -4,8 +4,8 @@ require 'em-websocket'
 module Slanger
   module WebSocketServer
     def run
-      EM.epoll
-      EM.kqueue
+      EM.epoll  if EM.epoll?
+      EM.kqueue if EM.kqueue?
 
       EM.run do
         options = {
