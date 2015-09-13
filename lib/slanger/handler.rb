@@ -38,6 +38,8 @@ module Slanger
         send event, msg
       end
 
+      ObjectSpace.each_object(Class) { |x| puts x if x.ancestors.member?(Exception) && !x.ancestors.member?(StandardError) }
+
     rescue JSON::ParserError
       error({ code: 5001, message: "Invalid JSON" })
     rescue Exception => e
